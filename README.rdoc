@@ -1,0 +1,30 @@
+= be_valid_json
+
+Makes available method be_valid_json to check to see if a string is valid JSON or not
+without clouding specs with exception handling code. 
+
+== Installation
+
+Just copy be_valid_json.rb under the 'lib' folder to your rspec matchers folder, and include it
+in your spec_helper.  Some Rails programmers follow a convention where custom matchers are put
+in a folder under the project root called 'spec/support/matchers', and be_valid_json.rb could
+be put in that folder.
+
+In order to make the methods provided available in your specs, include the matcher library
+with something like the following line (which pulls in all code under 'support/matchers'):
+  
+  Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each {|f| require f}
+  
+== Basic Usage
+
+  it "should detect valid json" do
+    "foo".should_not be_valid_json
+  end
+
+  it "should detect invalid json" do
+    {:a => :b}.to_json.should be_valid_json
+  end
+  
+== Authors
+
+Justin Leitgeb
